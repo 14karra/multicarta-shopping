@@ -9,4 +9,38 @@
         <tagDatabase tag="dbInit" xml:lang="en"/>
     </changeSet>
 
+    <changeSet id="shopping-2-create-item-table" author="Djambong Hank">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ITEM"/>
+            </not>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/create-item-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/drop-item-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-2-create-item-sequence" author="Djambong Hank">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="item_id_seq"/>
+            </not>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/create-item-seq.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/drop-item-seq.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-2-fill-item-table" author="Djambong Hank">
+        <preConditions onFail="HALT">
+            <tableIsEmpty tableName="ITEM"/>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/fill-item-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/clear-item-table.sql"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
