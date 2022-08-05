@@ -43,4 +43,18 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="shopping-3-create-users-table" author="Djambong Hank">
+        <sqlFile path="db/postgreSQL/prod/changelog-0.0.1/SHOPPING-3/create-users-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/prod/changelog-0.0.1/SHOPPING-3/drop-users-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-3-create-users-seq" author="Djambong Hank">
+        <sqlFile path="db/postgreSQL/prod/changelog-0.0.1/SHOPPING-3/create-users-seq.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/prod/changelog-0.0.1/SHOPPING-3/drop-users-seq.sql"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
