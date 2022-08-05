@@ -57,4 +57,11 @@
         </rollback>
     </changeSet>
 
+    <changeSet id="shopping-4-create-customer-table" author="Djambong Hank">
+        <sqlFile path="db/postgreSQL/prod/changelog-0.0.1/SHOPPING-4/create-customer-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/prod/changelog-0.0.1/SHOPPING-4/drop-customer-table.sql"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
