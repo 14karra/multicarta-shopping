@@ -24,11 +24,9 @@ public class Customer {
 
     @Id
     @NotNull
-    @Column(name = "ID")
     private UUID id;
 
     @NotNull
-    @Column(name = "NAME")
     private String name;
 
     @NotNull
@@ -36,12 +34,10 @@ public class Customer {
     private String lastName;
 
     @NotNull
-    @Column(name = "BIRTHDAY")
     @DateTimeFormat
     private Date birthday;
 
     @NotNull
-    @Column(name = "USERNAME")
     private String username;
 
     @Override
