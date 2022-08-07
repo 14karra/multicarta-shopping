@@ -19,6 +19,12 @@ public class ItemController extends ExceptionHandling implements ItemApi {
     private final ItemService itemService;
 
     @Override
+    public Items getAllItems() {
+        log.info("Request to get all items received.");
+        return new Items(itemService.getAllItems());
+    }
+
+    @Override
     public Items getItemPage(Integer index, Integer offset) {
         log.info("Request to get page with items received. Index: {}, Offset: {}", index, offset);
         return new Items(itemService.getItemPage(index, offset));
@@ -26,6 +32,7 @@ public class ItemController extends ExceptionHandling implements ItemApi {
 
     @Override
     public Purchase getBestSellerItemFromPassedDays(int daysPassed) {
+        log.info("Request to get best-seller item from past {} days received.", daysPassed);
         var dateInPast = LocalDate.now().minusDays(daysPassed);
         return itemService.getBestSellerItemStartingFromDate(dateInPast);
     }

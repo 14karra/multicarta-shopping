@@ -23,6 +23,13 @@ public class ItemServiceImpl implements ItemService {
 
     private final ItemRepository itemRepository;
 
+    @Override
+    public List<Item> getAllItems() {
+        log.info("Getting all items...");
+        return itemRepository.findAll();
+    }
+
+    @Override
     public List<Item> getItemPage(Integer index, Integer offset) {
         log.info("Getting page with items. Index: {}, Offset: {}", index, offset);
         return itemRepository.findAll(PageRequest.of(index, offset, Sort.by("id"))).getContent();

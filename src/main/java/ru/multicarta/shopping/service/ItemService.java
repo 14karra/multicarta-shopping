@@ -16,4 +16,6 @@ public interface ItemService {
     void saveUpdatedItem(Item item);
 
     Purchase getBestSellerItemStartingFromDate(LocalDate dateInPast);
+
+    List<Item> getAllItems();
 }
