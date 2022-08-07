@@ -16,6 +16,14 @@ import ru.multicarta.shopping.exception.ApiError;
 @RequestMapping(value = "/api/v1/item")
 public interface ItemApi {
 
+    @Operation(summary = "Get all items", operationId = "getAllItems", tags = {"Item"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "All items extracted successfully", content = {@Content(schema = @Schema(implementation = Items.class))}),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {@Content(schema = @Schema(implementation = ApiError.class))}),
+            })
+    @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
+    Items getAllItems();
+
     @Operation(summary = "Get items page", operationId = "getItemPage", tags = {"Item"},
             responses = {
                     @ApiResponse(responseCode = "200", description = "Item page extracted successfully", content = {@Content(schema = @Schema(implementation = Items.class))}),

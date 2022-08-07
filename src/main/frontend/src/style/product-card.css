@@ -1,0 +1,10 @@
+.productCard {
+    width: 75px;
+    height: 75px;
+    margin: 0 40px 40px 40px;
+    display: inline-block;
+}
+
+ProductCard, #cardsContainer {
+    display: inline-block;
+}
