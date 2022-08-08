@@ -6,9 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
-import ru.multicarta.shopping.dto.PurchaseRequest;
 import ru.multicarta.shopping.dto.Purchases;
-import ru.multicarta.shopping.entity.Purchase;
 import ru.multicarta.shopping.exception.ApiError;
 
 @RequestMapping(value = "/api/v1/purchase")
@@ -20,7 +18,7 @@ public interface PurchaseApi {
                     @ApiResponse(responseCode = "400", description = "Bad Request", content = {@Content(schema = @Schema(implementation = ApiError.class))})
             })
     @PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE}, produces = {MediaType.APPLICATION_XML_VALUE})
-    void postPerformPurchase(@RequestBody PurchaseRequest purchaseRequest);
+    void postPerformPurchase(@RequestBody String purchaseRequestXml);
 
     @Operation(summary = "Get purchases from last n days", operationId = "getPurchasesFromPassedDays", tags = {"Purchase"},
             responses = {

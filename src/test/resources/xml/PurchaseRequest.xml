@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PurchaseRequest xmlns="urn:iso:std:ru:multicarta:tech:xsd:PurchaseRequest" xsi:schemaLocation="urn:iso:std:ru:multicarta:tech:xsd:PurchaseRequest schema.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <itemId>2</itemId>
+  <quantity>5</quantity>
+</PurchaseRequest>

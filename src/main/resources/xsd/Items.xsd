@@ -1,15 +1,19 @@
-<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified"
+           xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns="urn:iso:std:ru:multicarta:tech:xsd:Items"
+           targetNamespace="urn:iso:std:ru:multicarta:tech:xsd:Items">
     <xs:element name="Items">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Item" maxOccurs="unbounded" minOccurs="0">
                     <xs:complexType>
                         <xs:sequence>
-                            <xs:element type="xs:byte" name="id"/>
+                            <xs:element type="xs:integer" name="id"/>
                             <xs:element type="xs:string" name="name"/>
                             <xs:element type="xs:string" name="description"/>
-                            <xs:element type="xs:float" name="amount"/>
-                            <xs:element type="xs:short" name="quantity"/>
+                            <xs:element type="xs:decimal" name="amount"/>
+                            <xs:element type="xs:integer" name="quantity"/>
                             <xs:element type="xs:dateTime" name="insertionDate"/>
                         </xs:sequence>
                     </xs:complexType>
