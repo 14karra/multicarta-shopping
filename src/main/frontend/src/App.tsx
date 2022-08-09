@@ -7,9 +7,10 @@ import {NotFound} from "./page/NotFound";
 import MulticardSmallLogo from './assets/small_logo.png';
 import {Login} from "./page/Login";
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {fas, faPassport} from '@fortawesome/free-solid-svg-icons';
+import {faPassport, fas} from '@fortawesome/free-solid-svg-icons';
 
 import {fab, faGithub, faTelegram, faTwitter} from "@fortawesome/free-brands-svg-icons"
+import {Registration} from "./page/Registration";
 
 library.add(fas, fab, faTelegram, faGithub, faTwitter, faPassport);
 
@@ -29,6 +30,8 @@ function App() {
                 <Redirect exact path="/" to="/login"/>
                 <Route exact path="/login" component={Login}/>
                 <Route path="/login/**" component={Login}/>
+                <Route path="/register" component={Registration}/>
+                <Route path="/register/**" component={Registration}/>
                 <Route exact path="/dashboard" component={Dashboard}/>
                 <Route path="/dashboard/**" component={Dashboard}/>
                 <Route exact path="/404" component={NotFound}/>

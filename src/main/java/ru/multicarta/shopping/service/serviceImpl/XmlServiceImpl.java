@@ -1,6 +1,7 @@
 package ru.multicarta.shopping.service.serviceImpl;
 
 import iso.std.ru.multicarta.tech.xsd.purchaserequest.PurchaseRequest;
+import iso.std.ru.multicarta.tech.xsd.userregistrationrequest.UserRegistrationRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.xml.sax.SAXException;
@@ -25,13 +26,18 @@ public class XmlServiceImpl implements XmlService {
 
     private final Schema itemsSchema;
     private final Schema purchaseRequestSchema;
+    private final Schema userValidationRequestSchema;
     private Map<Class, Consumer<String>> validationMap = new HashMap<>();
 
     public XmlServiceImpl() throws SAXException {
         SchemaFactory factory = SchemaFactory.newInstance(javax.xml.XMLConstants.W3C_XML_SCHEMA_NS_URI);
+
         itemsSchema = factory.newSchema(getItemsXsdSources());
         purchaseRequestSchema = factory.newSchema(getPurchaseRequestXsdSources());
+        userValidationRequestSchema = factory.newSchema(getUserRegistrationRequestXsdSources());
+
         validationMap.put(PurchaseRequest.class, this::validatePurchaseRequest);
+        validationMap.put(UserRegistrationRequest.class, this::validateUserRegistrationRequest);
     }
 
     @Override
@@ -49,6 +55,16 @@ public class XmlServiceImpl implements XmlService {
             validateXml(xmlMessage, purchaseRequestSchema);
         } catch (InvalidXmlException ex) {
             log.warn("Provided 'purchase request' is invalid");
+            throw new ApiException("107", "Provided xml did not pass validation");
+        }
+    }
+
+    private void validateUserRegistrationRequest(final String xmlMessage) throws InvalidXmlException {
+        try {
+            log.info("Validating 'user registration request' business message...");
+            validateXml(xmlMessage, userValidationRequestSchema);
+        } catch (InvalidXmlException ex) {
+            log.warn("Provided 'user registration request' is invalid");
             throw new ApiException("107", "Provided xml did not pass validation");
         }
     }
@@ -73,5 +89,9 @@ public class XmlServiceImpl implements XmlService {
 
     private URL getPurchaseRequestXsdSources() {
         return this.getClass().getClassLoader().getResource("/xsd/PurchaseRequest.xsd");
+    }
+
+    private URL getUserRegistrationRequestXsdSources() {
+        return this.getClass().getClassLoader().getResource("/xsd/UserRegistrationRequest.xsd");
     }
 }

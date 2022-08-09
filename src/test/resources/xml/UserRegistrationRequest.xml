@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<UserRegistrationRequest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                         xmlns="urn:iso:std:ru:multicarta:tech:xsd:UserRegistrationRequest"
+                         xsi:schemaLocation="urn:iso:std:ru:multicarta:tech:xsd:UserRegistrationRequest schema.xsd">
+    <username>14karra</username>
+    <password>c6PlvZTBSci1ENUnBc</password>
+    <name>Hank</name>
+    <lastName>Debain</lastName>
+    <birthday>1980-01-31</birthday>
+</UserRegistrationRequest>
