@@ -18,6 +18,7 @@ import javax.xml.bind.JAXBException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.UUID;
 
 @Slf4j
 @Service
@@ -60,6 +61,7 @@ public class PurchaseServiceImpl implements PurchaseService {
         itemService.saveUpdatedItem(item);
 
         var purchase = Purchase.builder()
+                .id(UUID.randomUUID())
                 .count(quantity.intValueExact())
                 .amount(amount)
                 .item(Item.builder().id(itemId.longValueExact()).build())

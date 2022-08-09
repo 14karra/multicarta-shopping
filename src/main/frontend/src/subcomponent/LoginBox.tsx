@@ -31,6 +31,9 @@ export const LoginBox: React.FunctionComponent = () => {
                             <div className="d-flex justify-content-center mt-3 p-3 login_container">
                                 <button type="submit" className="btn btn-primary">Войти</button>
                             </div>
+                            <div className="d-flex justify-content-center ">
+                                Нет аккаунта? пройдите&nbsp;<a href={"/register"}>регистрацию</a>
+                            </div>
                             <BrowserRouter>
                                 <Route path="/login/login-error"
                                        render={(props) =>

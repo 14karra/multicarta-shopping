@@ -7,4 +7,6 @@ import java.util.Optional;
 public interface CustomerService {
 
     Optional<Customer> getByUsername(String username);
+
+    void saveCustomer(Customer customer);
 }

@@ -4,21 +4,8 @@ import {concatMap} from "rxjs/operators";
 import {from, Subscription, timer} from "rxjs";
 import ItemsTable from "../table/ItemsTable";
 import {IItem} from "../model/interfaces";
-
-function extractJsonFromXml(response: Response): Promise<{}> {
-    return response.text()
-        .then(xmlString => {
-                let parseString = require('xml2js').parseString;
-                let jsonData = {};
-                parseString(xmlString, function (err: any, data: any) {
-                    console.log("Data received:\n" + JSON.stringify(data));
-                    jsonData = data;
-                });
-                console.log("Returning data received:\n" + JSON.stringify(jsonData));
-                return jsonData;
-            }
-        )
-}
+import {extractJsonFromXml} from "../util/XMLUtil";
+import fetchXml from "../client/WebServerClient";
 
 class ItemVisualizationPage extends Component<{}> {
     state = {
@@ -32,34 +19,29 @@ class ItemVisualizationPage extends Component<{}> {
     private pageSubscription: Subscription | null = null;
 
     async componentDidMount() {
-        const response = await fetch(this.state.baseApi, {
-            method: 'GET',
-            headers: {
-                'Accept': 'application/xml',
-            },
-        });
+        fetchXml(this.state.baseApi).then(response =>
+            extractJsonFromXml(response).then(jsonData => {
+                    let items = (jsonData as any).Items.Item;
+                    console.log("Data: " + JSON.stringify(items));
 
-        extractJsonFromXml(response).then(jsonData => {
-                let items = (jsonData as any).Items.Item;
-                console.log("Data: " + JSON.stringify(items));
+                    const totalPages = Math.ceil(items.length / this.state.maxPerPage);
+                    if (items.length > this.state.maxPerPage) items = items.slice(0, this.state.maxPerPage);
+                    this.setState({items: items, totalPages: totalPages});
 
-                const totalPages = Math.ceil(items.length / this.state.maxPerPage);
-                if (items.length > this.state.maxPerPage) items = items.slice(0, this.state.maxPerPage);
-                this.setState({items: items, totalPages: totalPages});
-
-                this.pageSubscription = timer(0, this.state.updateTime)
-                    .pipe(concatMap(() => from(this.getData())))
-                    .subscribe(data => {
-                        console.log("Setting items state from " +
-                            (this.state.items == undefined) ? "undefined" : JSON.stringify(this.state.items) + " to " +
-                            (data == undefined) ? "undefined" : JSON.stringify(data)
-                        );
-                        this.setState({
-                            items: data
+                    this.pageSubscription = timer(0, this.state.updateTime)
+                        .pipe(concatMap(() => from(this.getData())))
+                        .subscribe(data => {
+                            console.log("Setting items state from " +
+                                (this.state.items == undefined) ? "undefined" : JSON.stringify(this.state.items) + " to " +
+                                (data == undefined) ? "undefined" : JSON.stringify(data)
+                            );
+                            this.setState({
+                                items: data
+                            });
                         });
-                    });
-            }
-        );
+                }
+            )
+        )
     }
 
     componentWillUnmount(): void {
