@@ -28,4 +28,13 @@ public interface PurchaseApi {
     @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
     Purchases getPurchasesFromPassedDays(@RequestParam(name = "days", required = false, defaultValue = "7") int daysPassed);
 
+    @Operation(summary = "Get purchases page", operationId = "getPurchasePage", tags = {"Purchase"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Purchase page extracted successfully", content = {@Content(schema = @Schema(implementation = Purchases.class))}),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {@Content(schema = @Schema(implementation = ApiError.class))}),
+                    @ApiResponse(responseCode = "404", description = "Not found", content = {@Content(schema = @Schema(implementation = ApiError.class))})
+            })
+    @GetMapping(path = "/page/{index}/{offset}", produces = {MediaType.APPLICATION_XML_VALUE})
+    Purchases getPurchasePage(@PathVariable Integer index, @PathVariable Integer offset);
+
 }
