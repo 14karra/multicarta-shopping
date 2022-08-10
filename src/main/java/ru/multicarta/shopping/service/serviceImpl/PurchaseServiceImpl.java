@@ -3,6 +3,8 @@ package ru.multicarta.shopping.service.serviceImpl;
 import iso.std.ru.multicarta.tech.xsd.purchaserequest.PurchaseRequest;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -74,5 +76,11 @@ public class PurchaseServiceImpl implements PurchaseService {
     @Override
     public List<Purchase> getPurchasesStartingFromDate(LocalDate startingDate) {
         return purchaseRepository.getPurchasesStartingFromDate(startingDate);
+    }
+
+    @Override
+    public List<Purchase> getPurchasePage(Integer index, Integer offset) {
+        log.info("Getting page with purchases. Index: {}, Offset: {}", index, offset);
+        return purchaseRepository.findAll(PageRequest.of(index, offset, Sort.by("PURCHASE_DATE"))).getContent();
     }
 }

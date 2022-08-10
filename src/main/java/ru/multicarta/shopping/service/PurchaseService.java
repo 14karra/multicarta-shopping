@@ -10,4 +10,6 @@ public interface PurchaseService {
     void performPurchase(String username, String purchaseRequestXml);
 
     List<Purchase> getPurchasesStartingFromDate(LocalDate startingDate);
+
+    List<Purchase> getPurchasePage(Integer index, Integer offset);
 }

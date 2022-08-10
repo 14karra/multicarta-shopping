@@ -2,18 +2,18 @@ import React, {Component} from "react";
 import Pagination from "../pagination/Pagination";
 import {concatMap} from "rxjs/operators";
 import {from, Subscription, timer} from "rxjs";
-import ItemsTable from "../table/ItemsTable";
 import {IItem} from "../model/interfaces";
 import {extractJsonFromXml} from "../util/XMLUtil";
 import fetchXml from "../client/WebServerClient";
+import PurchasesTable from "../table/PurchasesTable";
 
-class ItemVisualizationPage extends Component<{}> {
+class WeeklyPurchasesPage extends Component<{}> {
     state = {
-        items: [],
+        purchases: [],
         currentPage: 0,
         totalPages: 0,
         updateTime: 10000,
-        baseApi: "/api/v1/item",
+        baseApi: "/api/v1/purchase",
         maxPerPage: 10
     };
     private pageSubscription: Subscription | null = null;
@@ -21,22 +21,22 @@ class ItemVisualizationPage extends Component<{}> {
     async componentDidMount() {
         fetchXml(this.state.baseApi).then(response =>
             extractJsonFromXml(response).then(jsonData => {
-                    let items = (jsonData as any).Items.Item;
-                    console.log("Data: " + JSON.stringify(items));
+                    let purchases = (jsonData as any).Purchases.Purchase;
+                    console.log("Data: " + JSON.stringify(purchases));
 
-                    const totalPages = Math.ceil(items.length / this.state.maxPerPage);
-                    if (items.length > this.state.maxPerPage) items = items.slice(0, this.state.maxPerPage);
-                    this.setState({items: items, totalPages: totalPages});
+                    const totalPages = Math.ceil(purchases.length / this.state.maxPerPage);
+                    if (purchases.length > this.state.maxPerPage) purchases = purchases.slice(0, this.state.maxPerPage);
+                    this.setState({purchases: purchases, totalPages: totalPages});
 
                     this.pageSubscription = timer(0, this.state.updateTime)
                         .pipe(concatMap(() => from(this.getData())))
                         .subscribe(data => {
-                            console.log("Setting items state from " +
-                                (this.state.items == undefined) ? "undefined" : JSON.stringify(this.state.items) + " to " +
+                            console.log("Setting purchases state from " +
+                                (this.state.purchases == undefined) ? "undefined" : JSON.stringify(this.state.purchases) + " to " +
                                 (data == undefined) ? "undefined" : JSON.stringify(data)
                             );
                             this.setState({
-                                items: data
+                                purchases: data
                             });
                         });
                 }
@@ -60,9 +60,9 @@ class ItemVisualizationPage extends Component<{}> {
         });
 
         return extractJsonFromXml(response).then(jsonData => {
-            let items = (jsonData as any).Items.Item;
-            console.log("Items: " + JSON.stringify(items));
-            return items;
+            let purchases = (jsonData as any).Purchases.Purchase;
+            console.log("Purchases: " + JSON.stringify(purchases));
+            return purchases;
         });
     }
 
@@ -91,9 +91,9 @@ class ItemVisualizationPage extends Component<{}> {
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div className={"form-inline"}>
-                    <h1>Товары</h1>
+                    <h1>Покупки</h1>
                 </div>
-                <ItemsTable items={this.state.items}/>
+                <PurchasesTable purchases={this.state.purchases}/>
                 <Pagination totalPages={this.state.totalPages} currentPage={this.state.currentPage}
                             onPrev={this.clickPrevHandler} onNext={this.clickNextHandler}
                             onPage={this.clickPageHandler}/>
@@ -102,4 +102,4 @@ class ItemVisualizationPage extends Component<{}> {
     }
 }
 
-export default ItemVisualizationPage;
+export default WeeklyPurchasesPage;

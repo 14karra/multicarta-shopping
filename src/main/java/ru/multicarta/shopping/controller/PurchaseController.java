@@ -39,4 +39,10 @@ public class PurchaseController extends ExceptionHandling implements PurchaseApi
         var dateInPast = LocalDate.now().minusDays(daysPassed);
         return new Purchases(purchaseService.getPurchasesStartingFromDate(dateInPast));
     }
+
+    @Override
+    public Purchases getPurchasePage(Integer index, Integer offset) {
+        log.info("Request to get page with purchases received. Index: {}, Offset: {}", index, offset);
+        return new Purchases(purchaseService.getPurchasePage(index, offset));
+    }
 }
