@@ -30,7 +30,7 @@ function App() {
                 <Redirect exact path="/" to="/login"/>
                 <Route exact path="/login" component={Login}/>
                 <Route path="/login/**" component={Login}/>
-                <Route path="/register" component={Registration}/>
+                <Route exact path="/register" component={Registration}/>
                 <Route path="/register/**" component={Registration}/>
                 <Route exact path="/dashboard" component={Dashboard}/>
                 <Route path="/dashboard/**" component={Dashboard}/>

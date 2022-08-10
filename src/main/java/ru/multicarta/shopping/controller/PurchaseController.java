@@ -7,8 +7,10 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.multicarta.shopping.annotation.ValidateRequestBody;
 import ru.multicarta.shopping.api.PurchaseApi;
 import ru.multicarta.shopping.dto.Purchases;
+import ru.multicarta.shopping.exception.ApiException;
 import ru.multicarta.shopping.exception.ExceptionHandling;
 import ru.multicarta.shopping.service.PurchaseService;
+import ru.multicarta.shopping.service.UserService;
 
 import java.time.LocalDate;
 
@@ -18,14 +20,18 @@ import java.time.LocalDate;
 public class PurchaseController extends ExceptionHandling implements PurchaseApi {
 
     private final PurchaseService purchaseService;
+    private final UserService userService;
 
     @ValidateRequestBody(PurchaseRequest.class)
     @Override
     public void postPerformPurchase(String purchaseRequestXml) {
-        // TODO: 05.08.2022 After implementing the security, get the username from the SecurityContextHolder
-        String username = "johnDoe";
-        System.out.println("Entered the controller");
-        purchaseService.performPurchase(username, purchaseRequestXml);
+        var expectedUsername = userService.getCurrentlyAuthenticatedUsername();
+        expectedUsername.ifPresentOrElse(username -> {
+            System.out.println("passed username retrieval from security context.");
+            purchaseService.performPurchase(username, purchaseRequestXml);
+        }, () -> {
+            throw new ApiException("111", "User not authorized.");
+        });
     }
 
     @Override
