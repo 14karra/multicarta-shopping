@@ -37,3 +37,23 @@ export function generateUserRequestXml(userRequest: {
     console.log("User request string: \n" + xmlString);
     return xmlString;
 }
+
+export function generatePurchaseRequestXml(itemId: number, quantity: number): string {
+    let obj = {
+        PurchaseRequest: {
+            itemId: itemId,
+            quantity: quantity,
+            $: {
+                "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+                "xmlns": "urn:iso:std:ru:multicarta:tech:xsd:PurchaseRequest",
+                "xsi:schemaLocation": "urn:iso:std:ru:multicarta:tech:xsd:PurchaseRequest schema.xsd"
+            }
+        }
+    };
+
+    let xml2js = require('xml2js');
+    let builder = new xml2js.Builder();
+    let xmlString = builder.buildObject(obj);
+    console.log("Purchase request string: \n" + xmlString);
+    return xmlString;
+}

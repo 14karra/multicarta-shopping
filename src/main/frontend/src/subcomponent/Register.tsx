@@ -1,4 +1,4 @@
-import {Component, useState} from "react";
+import React, {Component, useState} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 // @ts-ignore
@@ -222,6 +222,9 @@ class Register extends Component<Props, State> {
                                     </div>
                                     <div className="form-group d-flex justify-content-center p-2 login_container">
                                         <button type="submit" className="btn btn-primary">Регистрироваться</button>
+                                    </div>
+                                    <div className="d-flex justify-content-center ">
+                                        Уже есть аккаунт?&nbsp;<a href={"/login"}>войти</a>
                                     </div>
                                 </div>
                             )}

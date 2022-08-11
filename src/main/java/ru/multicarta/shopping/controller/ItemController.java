@@ -25,6 +25,12 @@ public class ItemController extends ExceptionHandling implements ItemApi {
     }
 
     @Override
+    public Items getAvailableItems() {
+        log.info("Request to get all available items received.");
+        return new Items(itemService.getAvailableItems());
+    }
+
+    @Override
     public Items getItemPage(Integer index, Integer offset) {
         log.info("Request to get page with items received. Index: {}, Offset: {}", index, offset);
         return new Items(itemService.getItemPage(index, offset));

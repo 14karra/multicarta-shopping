@@ -24,6 +24,14 @@ public interface ItemApi {
     @GetMapping(produces = {MediaType.APPLICATION_XML_VALUE})
     Items getAllItems();
 
+    @Operation(summary = "Get items available for sale", operationId = "getAvailableItems", tags = {"Item"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "All items available for sale extracted successfully", content = {@Content(schema = @Schema(implementation = Items.class))}),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {@Content(schema = @Schema(implementation = ApiError.class))}),
+            })
+    @GetMapping(path = "/available", produces = {MediaType.APPLICATION_XML_VALUE})
+    Items getAvailableItems();
+
     @Operation(summary = "Get items page", operationId = "getItemPage", tags = {"Item"},
             responses = {
                     @ApiResponse(responseCode = "200", description = "Item page extracted successfully", content = {@Content(schema = @Schema(implementation = Items.class))}),

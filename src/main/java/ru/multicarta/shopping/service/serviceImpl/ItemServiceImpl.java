@@ -30,6 +30,11 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public List<Item> getAvailableItems() {
+        return itemRepository.getItemsAvailableForSale();
+    }
+
+    @Override
     public List<Item> getItemPage(Integer index, Integer offset) {
         log.info("Getting page with items. Index: {}, Offset: {}", index, offset);
         return itemRepository.findAll(PageRequest.of(index, offset, Sort.by("id"))).getContent();
