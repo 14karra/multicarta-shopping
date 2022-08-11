@@ -18,4 +18,6 @@ public interface ItemService {
     Purchase getBestSellerItemStartingFromDate(LocalDate dateInPast);
 
     List<Item> getAllItems();
+
+    List<Item> getAvailableItems();
 }

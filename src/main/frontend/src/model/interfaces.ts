@@ -10,7 +10,9 @@ export interface IItem {
 export interface ICustomer {
     id: string,
     name: string,
-    lastName: string
+    lastName: string,
+    birthday: string,
+    username: string
 }
 
 export interface IPurchase {

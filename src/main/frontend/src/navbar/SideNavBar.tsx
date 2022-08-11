@@ -4,6 +4,8 @@ import "@fortawesome/react-fontawesome";
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import ItemVisualizationPage from "../tablePage/ItemVisualizationPage";
 import WeeklyPurchasesPage from "../tablePage/WeeklyPurchasesPage";
+import ItemPurchasePage from "../tablePage/ItemPurchasePage";
+import CustomerVisualizationPage from "../tablePage/CustomerVisualizationPage";
 
 export class SideNavigationBar extends Component {
     render() {
@@ -21,8 +23,11 @@ export class SideNavigationBar extends Component {
                                             &nbsp;Товары
                                         </div>
                                         <div className="dropdown-menu">
-                                            <Link to="/dashboard/items">
+                                            <Link to="/dashboard/items/visualize">
                                                 <div className="dropdown-item">Список товаров</div>
+                                            </Link>
+                                            <Link to="/dashboard/items/perform-purchase">
+                                                <div className="dropdown-item">Покупать товар</div>
                                             </Link>
                                         </div>
                                     </li>
@@ -38,11 +43,25 @@ export class SideNavigationBar extends Component {
                                             </Link>
                                         </div>
                                     </li>
+                                    <li className="nav-item btn-group dropright">
+                                        <div className="nav-link dropdown-toggle" data-toggle="dropdown"
+                                             aria-haspopup="true" aria-expanded="false" role="button">
+                                            <FontAwesomeIcon icon={['fas', 'passport']} size="lg"/>
+                                            &nbsp;Клиенты
+                                        </div>
+                                        <div className="dropdown-menu">
+                                            <Link to="/dashboard/customers/visualize">
+                                                <div className="dropdown-item">Список клиентов</div>
+                                            </Link>
+                                        </div>
+                                    </li>
                                 </ul>
                             </div>
                         </nav>
-                        <Route path="/dashboard/items" component={ItemVisualizationPage}/>
-                        <Route path="/dashboard/purchases/weekly" component={WeeklyPurchasesPage}/>
+                        <Route strict={true} path="/dashboard/items/visualize" component={ItemVisualizationPage}/>
+                        <Route strict={true} path="/dashboard/items/perform-purchase" component={ItemPurchasePage}/>
+                        <Route strict={true} path="/dashboard/purchases/weekly" component={WeeklyPurchasesPage}/>
+                        <Route strict={true} path="/dashboard/customers/visualize" component={CustomerVisualizationPage}/>
                     </div>
                 </div>
             </BrowserRouter>

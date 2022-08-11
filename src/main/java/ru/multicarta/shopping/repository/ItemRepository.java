@@ -7,6 +7,7 @@ import ru.multicarta.shopping.entity.Item;
 import ru.multicarta.shopping.entity.Purchase;
 
 import java.time.LocalDate;
+import java.util.List;
 
 @Repository
 public interface ItemRepository extends JpaRepository<Item, Long> {
@@ -21,4 +22,9 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
             "LIMIT 1;",
             nativeQuery = true)
     Purchase getBestSellerItemStartingFromDate(LocalDate dateInPast);
+
+    @Query(value = "SELECT * FROM ITEM AS i " +
+            "WHERE i.quantity > 0;",
+            nativeQuery = true)
+    List<Item> getItemsAvailableForSale();
 }

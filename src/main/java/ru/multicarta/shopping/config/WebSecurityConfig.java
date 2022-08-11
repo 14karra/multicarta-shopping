@@ -39,7 +39,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/static/js/*",
             "login",
             "/login/login-error",
-            "/register"
+            "/register",
+            "/api/v1/user/register",
+            "/api/v1/user/register/**"
     ));
 
     @Override
