@@ -41,8 +41,8 @@
 Для этого варианта, нужно выполнить следующие действия.<br>
 1) клонировать исходный код с [репозитория](https://github.com/14karra/multicarta-shopping) Github, в желаемую папку.
 3) запускать Docker Desktop.
-2) через терминал, переходите папку указанную на этап 1.
-3) запусайте следующие команды последовательно.
+2) через терминал, переходите в папку, указанную на этапе 1.
+3) запускать следующие команды последовательно.
 - `docker network create -d bridge multicarta_net`
 - `docker pull postgres:11`
 - `docker run -dit --network=multicarta_net --name PostgreSQL11 -p 5433:5432 -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=SHOPPING_DB postgres:11`  
