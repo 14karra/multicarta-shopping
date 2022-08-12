@@ -6,6 +6,7 @@ import ItemVisualizationPage from "../tablePage/ItemVisualizationPage";
 import WeeklyPurchasesPage from "../tablePage/WeeklyPurchasesPage";
 import ItemPurchasePage from "../tablePage/ItemPurchasePage";
 import CustomerVisualizationPage from "../tablePage/CustomerVisualizationPage";
+import BestSellerItemVisualizationPage from "../tablePage/BestSellerItemVisualizationPage";
 
 export class SideNavigationBar extends Component {
     render() {
@@ -29,6 +30,9 @@ export class SideNavigationBar extends Component {
                                             <Link to="/dashboard/items/perform-purchase">
                                                 <div className="dropdown-item">Покупать товар</div>
                                             </Link>
+                                            <Link to="/dashboard/items/best-seller">
+                                                <div className="dropdown-item">Бестселлер товар</div>
+                                            </Link>
                                         </div>
                                     </li>
                                     <li className="nav-item btn-group dropright">
@@ -39,7 +43,7 @@ export class SideNavigationBar extends Component {
                                         </div>
                                         <div className="dropdown-menu">
                                             <Link to="/dashboard/purchases/weekly">
-                                                <div className="dropdown-item">Недельные покупки</div>
+                                                <div className="dropdown-item">Еженедельные покупки</div>
                                             </Link>
                                         </div>
                                     </li>
@@ -59,6 +63,7 @@ export class SideNavigationBar extends Component {
                             </div>
                         </nav>
                         <Route strict={true} path="/dashboard/items/visualize" component={ItemVisualizationPage}/>
+                        <Route strict={true} path="/dashboard/items/best-seller" component={BestSellerItemVisualizationPage}/>
                         <Route strict={true} path="/dashboard/items/perform-purchase" component={ItemPurchasePage}/>
                         <Route strict={true} path="/dashboard/purchases/weekly" component={WeeklyPurchasesPage}/>
                         <Route strict={true} path="/dashboard/customers/visualize" component={CustomerVisualizationPage}/>

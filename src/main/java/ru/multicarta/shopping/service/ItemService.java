@@ -1,9 +1,7 @@
 package ru.multicarta.shopping.service;
 
 import ru.multicarta.shopping.entity.Item;
-import ru.multicarta.shopping.entity.Purchase;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -15,7 +13,7 @@ public interface ItemService {
 
     void saveUpdatedItem(Item item);
 
-    Purchase getBestSellerItemStartingFromDate(LocalDate dateInPast);
+    String getMonthlyBestSellerItem();
 
     List<Item> getAllItems();
 
