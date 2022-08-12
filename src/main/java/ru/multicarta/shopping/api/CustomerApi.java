@@ -30,4 +30,12 @@ public interface CustomerApi {
             })
     @GetMapping(path = "/page/{index}/{offset}", produces = {MediaType.APPLICATION_XML_VALUE})
     Customers getCustomerPage(@PathVariable Integer index, @PathVariable Integer offset);
+
+    @Operation(summary = "Get customer with most purchased from last 6 months", operationId = "get6MonthsBestCustomer", tags = {"Item"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Customer with most purchased from last 6 months was extracted successfully", content = {@Content(schema = @Schema(implementation = String.class))}),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {@Content(schema = @Schema(implementation = ApiError.class))})
+            })
+    @GetMapping(path = "/best-customer", produces = {MediaType.TEXT_PLAIN_VALUE})
+    String get6MonthsBestCustomer();
 }

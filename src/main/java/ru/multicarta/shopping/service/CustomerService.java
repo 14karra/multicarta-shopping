@@ -14,4 +14,6 @@ public interface CustomerService {
     List<Customer> getAllCustomers();
 
     List<Customer> getCustomerPage(Integer index, Integer offset);
+
+    String get6MonthsBestCustomer();
 }
