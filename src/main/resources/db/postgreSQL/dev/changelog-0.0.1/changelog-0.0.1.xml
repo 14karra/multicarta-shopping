@@ -9,4 +9,97 @@
         <tagDatabase tag="dbInit" xml:lang="en"/>
     </changeSet>
 
+    <changeSet id="shopping-2-create-item-table" author="Djambong Hank">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="ITEM"/>
+            </not>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/create-item-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/drop-item-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-2-create-item-sequence" author="Djambong Hank">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <sequenceExists sequenceName="item_id_seq"/>
+            </not>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/create-item-seq.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/drop-item-seq.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-2-fill-item-table" author="Djambong Hank">
+        <preConditions onFail="HALT">
+            <tableIsEmpty tableName="ITEM"/>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/fill-item-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-2/clear-item-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-3-create-users-table" author="Djambong Hank">
+        <preConditions onFail="HALT">
+            <not>
+                <tableExists tableName="USERS"/>
+            </not>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-3/create-users-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-3/drop-users-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-3-create-users-seq" author="Djambong Hank">
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-3/create-users-seq.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-3/drop-users-seq.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-4-create-customer-table" author="Djambong Hank">
+        <preConditions>
+            <and>
+                <not>
+                    <tableExists tableName="CUSTOMER"/>
+                </not>
+                <not>
+                    <indexExists indexName="CUSTOMER_ID_UIDX"/>
+                </not>
+            </and>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-4/create-customer-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-4/drop-customer-table.sql"/>
+        </rollback>
+    </changeSet>
+
+    <changeSet id="shopping-5-create-purchase-table" author="Djambong Hank">
+        <preConditions>
+            <and>
+                <not>
+                    <tableExists tableName="PURCHASE"/>
+                </not>
+                <not>
+                    <indexExists indexName="PURCHASE_ID_UIDX"/>
+                </not>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyName="PURCHASE_ITEM_ID_FK"/>
+                </not>
+                <not>
+                    <foreignKeyConstraintExists foreignKeyName="PURCHASE_CUSTOMER_ID_FK"/>
+                </not>
+            </and>
+        </preConditions>
+        <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-5/create-purchase-table.sql"/>
+        <rollback>
+            <sqlFile path="db/postgreSQL/dev/changelog-0.0.1/SHOPPING-5/drop-purchase-table.sql"/>
+        </rollback>
+    </changeSet>
+
 </databaseChangeLog>
