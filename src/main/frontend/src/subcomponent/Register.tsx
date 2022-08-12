@@ -143,6 +143,8 @@ class Register extends Component<Props, State> {
             birthday: this.state.birthday
         };
 
+        let defaultDate = this.state.birthday;
+
         return (
             <div className="col-md-12">
                 <div className="card card-container">
@@ -209,7 +211,7 @@ class Register extends Component<Props, State> {
                                     </div>
                                     <div className="form-group">
                                         <label htmlFor="birthday"> Дата рождения (день/месяц/год) </label>
-                                        <DatePicker selected={this.state.birthday}
+                                        <DatePicker selected={defaultDate}
                                                     onChange={(newDate: Date) => {
                                                         console.log("hahaha");
                                                         this.setState({birthday: newDate})

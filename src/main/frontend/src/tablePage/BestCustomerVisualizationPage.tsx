@@ -1,6 +1,7 @@
 import React, {Component} from "react";
 import {UserCard} from "react-ui-cards/dist";
 import {fetchPlainText} from "../client/WebServerClient";
+import "../style/customer-card.css";
 
 type Props = {}
 type State = {

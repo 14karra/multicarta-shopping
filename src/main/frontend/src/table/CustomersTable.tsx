@@ -8,7 +8,7 @@ interface IProps {
 }
 
 let CustomersTable = (props: IProps) => (
-    <span id={"cardsContainer"}>
+    <div id={"cardsContainer"}>
         {props.customers.map(customer => {
 
             console.log("Unique customer: " + JSON.stringify(customer));
@@ -25,7 +25,7 @@ let CustomersTable = (props: IProps) => (
                 />
             )
         })}
-    </span>
+    </div>
 );
 
 export default CustomersTable;
