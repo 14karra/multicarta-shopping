@@ -1,4 +1,4 @@
-import React, {Component, useState} from "react";
+import React, {Component} from "react";
 import {ErrorMessage, Field, Form, Formik} from "formik";
 import * as Yup from "yup";
 // @ts-ignore
@@ -29,7 +29,7 @@ class Register extends Component<Props, State> {
             password: "",
             name: "",
             lastName: "",
-            birthday: new Date(1990, 1,1),
+            birthday: new Date(1990, 1, 1),
             successful: false,
             message: "",
             baseApi: "/api/v1/user/register"
@@ -97,7 +97,11 @@ class Register extends Component<Props, State> {
                 // Unfortunately, fetch doesn't send (404 error) into the cache itself
                 // You have to send it, as I have done below
                 if (response.status >= 400) {
-                    throw new Error("Server responds with error!");
+                    extractJsonFromXml(response).then(jsonData => {
+                        let apiError = (jsonData as any).ApiError;
+                        let resMessage = "Status: " + apiError.status + ". " + apiError.message;
+                        throw new Error(resMessage);
+                    });
                 }
                 this.setState({
                     message: "Регистрация прошла успешна!",

@@ -96,12 +96,18 @@ class ItemPurchasePage extends Component<{}, State> {
         postRequest(this.state.purchaseBaseApi, xmlMessage)
             .then(response => {
                 if (response.status >= 400) {
-                    throw new Error("Server responds with error!");
+                    let resMessage = "";
+                    extractJsonFromXml(response).then(jsonData => {
+                        let apiError = (jsonData as any).ApiError;
+                        resMessage = "Status: " + apiError.status + ". " + apiError.message;
+                    });
+                    throw new Error(resMessage);
+                } else {
+                    this.setState({
+                        message: "Покупка прошла успешна!",
+                        successful: true
+                    });
                 }
-                this.setState({
-                    message: "Покупка прошла успешна!",
-                    successful: true
-                });
             })
             .then(resp => {
                 },

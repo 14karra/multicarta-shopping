@@ -7,6 +7,15 @@ export default async function fetchXml(path: string): Promise<Response> {
     });
 }
 
+export async function fetchPlainText(path: string): Promise<Response> {
+    return fetch(path, {
+        method: 'GET',
+        headers: {
+            'Accept': 'text/plain'
+        },
+    });
+}
+
 export async function postRequest(path: string, xmlBody: string): Promise<Response> {
     return fetch(path, {
         method: 'POST',

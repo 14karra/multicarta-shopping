@@ -91,7 +91,7 @@ class WeeklyPurchasesPage extends Component<{}> {
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div className={"form-inline"}>
-                    <h1>Покупки</h1>
+                    <h1>Еженедельные покупки</h1>
                 </div>
                 <PurchasesTable purchases={this.state.purchases}/>
                 <Pagination totalPages={this.state.totalPages} currentPage={this.state.currentPage}
