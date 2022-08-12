@@ -26,4 +26,10 @@ public class CustomerController extends ExceptionHandling implements CustomerApi
         log.info("Request to get page with customers received. Index: {}, Offset: {}", index, offset);
         return new Customers(customerService.getCustomerPage(index, offset));
     }
+
+    @Override
+    public String get6MonthsBestCustomer() {
+        log.info("Request to get the best customer from past 6 months.");
+        return customerService.get6MonthsBestCustomer();
+    }
 }

@@ -50,8 +50,7 @@ public class ItemServiceImpl implements ItemService {
     @SneakyThrows
     @Override
     public String getMonthlyBestSellerItem() {
-        var bestSellerItemName = itemRepository.getMonthlyBestSellerItem();
-        System.out.println("Monthly best seller item:\n" + bestSellerItemName);
-        return bestSellerItemName;
+        System.out.println("Getting monthly best seller item...");
+        return itemRepository.getMonthlyBestSellerItem();
     }
 }

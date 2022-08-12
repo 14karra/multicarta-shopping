@@ -7,6 +7,7 @@ import WeeklyPurchasesPage from "../tablePage/WeeklyPurchasesPage";
 import ItemPurchasePage from "../tablePage/ItemPurchasePage";
 import CustomerVisualizationPage from "../tablePage/CustomerVisualizationPage";
 import BestSellerItemVisualizationPage from "../tablePage/BestSellerItemVisualizationPage";
+import BestCustomerVisualizationPage from "../tablePage/BestCustomerVisualizationPage";
 
 export class SideNavigationBar extends Component {
     render() {
@@ -57,6 +58,9 @@ export class SideNavigationBar extends Component {
                                             <Link to="/dashboard/customers/visualize">
                                                 <div className="dropdown-item">Список клиентов</div>
                                             </Link>
+                                            <Link to="/dashboard/customers/best-customer">
+                                                <div className="dropdown-item">Лучший клиент за полгода</div>
+                                            </Link>
                                         </div>
                                     </li>
                                 </ul>
@@ -67,6 +71,7 @@ export class SideNavigationBar extends Component {
                         <Route strict={true} path="/dashboard/items/perform-purchase" component={ItemPurchasePage}/>
                         <Route strict={true} path="/dashboard/purchases/weekly" component={WeeklyPurchasesPage}/>
                         <Route strict={true} path="/dashboard/customers/visualize" component={CustomerVisualizationPage}/>
+                        <Route strict={true} path="/dashboard/customers/best-customer" component={BestCustomerVisualizationPage}/>
                     </div>
                 </div>
             </BrowserRouter>

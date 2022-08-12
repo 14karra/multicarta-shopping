@@ -40,4 +40,10 @@ public class CustomerServiceImpl implements CustomerService {
         log.info("Getting page with customers. Index: {}, Offset: {}", index, offset);
         return customerRepository.findAll(PageRequest.of(index, offset)).getContent();
     }
+
+    @Override
+    public String get6MonthsBestCustomer() {
+        System.out.println("Getting 6 months best customer...");
+        return customerRepository.get6MonthsBestCustomer();
+    }
 }
