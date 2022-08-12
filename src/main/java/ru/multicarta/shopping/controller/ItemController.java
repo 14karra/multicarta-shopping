@@ -38,4 +38,10 @@ public class ItemController extends ExceptionHandling implements ItemApi {
         log.info("Request to get best-seller item from past month.");
         return itemService.getMonthlyBestSellerItem();
     }
+
+    @Override
+    public String getBestSellerItemFor18YearsOldCustomers() {
+        log.info("Request to get best-seller item from 18 years old customers.");
+        return itemService.getBestSellerItemFor18YearsOldCustomers();
+    }
 }

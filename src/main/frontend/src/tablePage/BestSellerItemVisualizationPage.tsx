@@ -1,11 +1,14 @@
 import React, {Component} from "react";
 import {ProductCard} from "react-ui-cards/dist";
 import {fetchPlainText} from "../client/WebServerClient";
+import "../style/product-card.css"
 
-type Props = {}
+type Props = {
+    baseApi: string,
+    headerText: string
+}
 type State = {
-    itemName: string,
-    baseApi: string
+    itemName: string
 }
 
 class BestSellerItemVisualizationPage extends Component<Props, State> {
@@ -13,13 +16,12 @@ class BestSellerItemVisualizationPage extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
         this.state = {
-            itemName: "",
-            baseApi: "/api/v1/item/best-seller"
+            itemName: ""
         };
     }
 
     async componentDidMount() {
-        fetchPlainText(this.state.baseApi)
+        fetchPlainText(this.props.baseApi)
             .then(response => {
                     response.text()
                         .then(itemName => {
@@ -35,7 +37,7 @@ class BestSellerItemVisualizationPage extends Component<Props, State> {
         return (
             <main role="main" className="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div className={"form-inline"}>
-                    <h1>Бестселлер продукт</h1>
+                    <h1>{this.props.headerText}</h1>
                 </div>
                 {
                     this.state.itemName && (

@@ -32,6 +32,12 @@ public class ItemServiceImpl implements ItemService {
     }
 
     @Override
+    public String getBestSellerItemFor18YearsOldCustomers() {
+        System.out.println("Getting best seller item for 18 years old customers...");
+        return itemRepository.getBestSellerItemFor18YearsOldCustomers();
+    }
+
+    @Override
     public List<Item> getItemPage(Integer index, Integer offset) {
         log.info("Getting page with items. Index: {}, Offset: {}", index, offset);
         return itemRepository.findAll(PageRequest.of(index, offset, Sort.by("id"))).getContent();

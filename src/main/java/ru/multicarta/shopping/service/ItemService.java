@@ -18,4 +18,6 @@ public interface ItemService {
     List<Item> getAllItems();
 
     List<Item> getAvailableItems();
+
+    String getBestSellerItemFor18YearsOldCustomers();
 }

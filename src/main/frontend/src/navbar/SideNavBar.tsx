@@ -34,6 +34,9 @@ export class SideNavigationBar extends Component {
                                             <Link to="/dashboard/items/best-seller">
                                                 <div className="dropdown-item">Бестселлер товар</div>
                                             </Link>
+                                            <Link to="/dashboard/items/best-seller-for-18-years-old-customers">
+                                                <div className="dropdown-item">Бестселлер товар для 18 летных клиентов</div>
+                                            </Link>
                                         </div>
                                     </li>
                                     <li className="nav-item btn-group dropright">
@@ -67,11 +70,20 @@ export class SideNavigationBar extends Component {
                             </div>
                         </nav>
                         <Route strict={true} path="/dashboard/items/visualize" component={ItemVisualizationPage}/>
-                        <Route strict={true} path="/dashboard/items/best-seller" component={BestSellerItemVisualizationPage}/>
+                        <Route strict={true} path="/dashboard/items/best-seller"
+                               render={(props) => <BestSellerItemVisualizationPage {...props}
+                                                                                   baseApi={"/api/v1/item/best-seller"}
+                                                                                   headerText={"Бестселлер товар"}/>}/>
+                        <Route strict={true} path="/dashboard/items/best-seller-for-18-years-old-customers"
+                               render={(props) => <BestSellerItemVisualizationPage {...props}
+                                                                                   baseApi={"/api/v1/item/best-seller-for-18-years-old"}
+                                                                                   headerText={"Бестселлер товар для 18 летных клиентов"}/>}/>
                         <Route strict={true} path="/dashboard/items/perform-purchase" component={ItemPurchasePage}/>
                         <Route strict={true} path="/dashboard/purchases/weekly" component={WeeklyPurchasesPage}/>
-                        <Route strict={true} path="/dashboard/customers/visualize" component={CustomerVisualizationPage}/>
-                        <Route strict={true} path="/dashboard/customers/best-customer" component={BestCustomerVisualizationPage}/>
+                        <Route strict={true} path="/dashboard/customers/visualize"
+                               component={CustomerVisualizationPage}/>
+                        <Route strict={true} path="/dashboard/customers/best-customer"
+                               component={BestCustomerVisualizationPage}/>
                     </div>
                 </div>
             </BrowserRouter>

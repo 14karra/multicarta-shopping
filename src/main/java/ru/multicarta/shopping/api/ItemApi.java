@@ -46,4 +46,12 @@ public interface ItemApi {
             })
     @GetMapping(path = "/best-seller", produces = {MediaType.TEXT_PLAIN_VALUE})
     String getMonthlyBestSellerItem();
+
+    @Operation(summary = "Get most purchased item for 18 years old customers", operationId = "getBestSellerItemFor18YearsOldCustomers", tags = {"Item"},
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Most purchased item years old customers was extracted successfully", content = {@Content(schema = @Schema(implementation = String.class))}),
+                    @ApiResponse(responseCode = "400", description = "Bad Request", content = {@Content(schema = @Schema(implementation = ApiError.class))})
+            })
+    @GetMapping(path = "/best-seller-for-18-years-old", produces = {MediaType.TEXT_PLAIN_VALUE})
+    String getBestSellerItemFor18YearsOldCustomers();
 }

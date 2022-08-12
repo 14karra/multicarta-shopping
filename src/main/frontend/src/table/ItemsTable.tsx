@@ -8,7 +8,7 @@ interface IProps {
 }
 
 let ItemsTable = (props: IProps) => (
-    <span id={"cardsContainer"}>
+    <div id={"cardsContainer"}>
         {props.items.map(item => {
 
             console.log("Unique item: " + JSON.stringify(item));
@@ -25,7 +25,7 @@ let ItemsTable = (props: IProps) => (
                 />
             )
         })}
-    </span>
+    </div>
 );
 
 export default ItemsTable;
